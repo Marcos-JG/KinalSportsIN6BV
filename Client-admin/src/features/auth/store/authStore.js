@@ -12,6 +12,15 @@ export const useAuthStore = create(
             error: null,
             isAuthenticated: false,
 
+            logout: () => {
+                set({
+                    user: null,
+                    token: null,
+                    expiresAt: null,
+                    isAuthenticated: false
+                });
+            },
+
             login: async ({ emailOrUsername, password }) => {
                 try {
                     set({ loading: true, error: null });
@@ -22,22 +31,22 @@ export const useAuthStore = create(
 
                     set({
                         user: data.userDetails,
-                        token: data.token,
+                        token: data.accessToken,
                         expiresAt: data.expiresAt,
                         loading: false,
                     })
 
-                    return { success: true}
-                    
+                    return { success: true }
+
                 } catch (err) {
                     console.error("Login error: ", err);
-                    const message = 
+                    const message =
                         err.response?.data?.message || "Error de autenticación";
-                    set({ error: message, loading: false})
-                    return { success: false, error: message}
+                    set({ error: message, loading: false })
+                    return { success: false, error: message }
                 }
             }
         }),
-        { name: "auth-storage"}
+        { name: "auth-storage" }
     )
 )

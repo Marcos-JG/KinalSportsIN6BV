@@ -1,10 +1,10 @@
-import {DashboardContainer} from "../../shared/layout/DashboardContainer.jsx"
-
+import {DashboardContainer} from "../../shared/components/layout/DashboardContainer.jsx"
+import { Outlet } from "react-router-dom"
 
 export const DashboardPage = () => {
   return (
     <DashboardContainer>
-      <div>DashboardPage</div>
+      <Outlet />
     </DashboardContainer>
   )
 }

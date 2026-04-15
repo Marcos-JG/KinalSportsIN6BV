@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useAuthStore } from "../../features/auth/store/authStore";
 
 const axiosAuth = axios.create({
     baseURL: import.meta.env.VITE_AUTH_URL,
@@ -7,5 +8,16 @@ const axiosAuth = axios.create({
         "Content-Type": "application/json"
     }
 })
+
+
+
+axiosAuth.interceptors.request.use((config) => {
+    config._axiosClient = "auth";
+    const token = useAuthStore.getState().token;
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
 
 export { axiosAuth }
