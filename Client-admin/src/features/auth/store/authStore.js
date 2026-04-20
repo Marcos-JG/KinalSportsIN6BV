@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { login as loginRequest } from "../../../shared/api"
+
+import { login as loginRequest, register as registerRequest } from "../../../shared/api"
 
 export const useAuthStore = create(
     persist(
@@ -19,6 +20,19 @@ export const useAuthStore = create(
                     expiresAt: null,
                     isAuthenticated: false
                 });
+            },
+
+            register: async (formData) => {
+                try {
+                set({ loading: true, error: null });
+                const { data } = await registerRequest(formData);
+                set({ loading: false });
+                return { success: true, emailVerificationRequired: data?.emailVerificationRequired, data };
+                } catch (err) {
+                    const message = err.response?.data?.message || "Error al registrar usuario";
+                    set({ error: message, loading: false });
+                    return { success: false, error: message };
+                }
             },
 
             login: async ({ emailOrUsername, password }) => {
