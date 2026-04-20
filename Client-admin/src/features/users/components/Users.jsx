@@ -3,6 +3,7 @@ import { useUserManagmentStore } from "../store/useUserManagmentStore.js"
 import { Spinner } from "../../../shared/components/layout/Spinner.jsx";
 import { showError, showSuccess } from "../../../shared/utils/toast.js";
 import { CreateUserModal } from "./CreateUserModal.jsx";
+import { UserDetailModal } from "./UserDetailModel.jsx";
 import { useAuthStore } from "../../auth/store/authStore.js";
 
 const PAGE_SIZE = 8;
@@ -16,6 +17,8 @@ export const Users = () => {
   const [roleFilter, setRoleFilter] = useState("ALL");
   const [page, setPage] = useState(1);
   const [openCreateModal, setOpenCreateModal] = useState(false);
+  const [openDetailModal, setOpenDetailModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
 
 
@@ -33,8 +36,13 @@ export const Users = () => {
 
     }
     showError(res.error || "Error al crear usuario");
-    return false;
+    return false; 
   }
+
+  const handleOpenDetail = (user) => {
+    setSelectedUser(user);
+    setOpenDetailModal(true);
+  };
 
   return (
     <div className="p-4">
@@ -114,7 +122,10 @@ export const Users = () => {
                       </span>
                     </td>
                     <td className="px-3 py-3 text-right">
-                      <button className="px-3 py-1.5 rounded border font-semibold bg-main-blue text-white text-sm hover:opacity-90 transition ">
+                      <button 
+                      className="px-3 py-1.5 rounded border font-semibold bg-main-blue text-white text-sm hover:opacity-90 transition "
+                        onClick={() => handleOpenDetail(u)}
+                      >
                         Ver/Editar
                       </button>
                     </td>
@@ -152,6 +163,17 @@ export const Users = () => {
           onCreate={handleCreate}
           loading={loading}
           error={error}
+          />
+
+          <UserDetailModal
+           key={selectedUser?.id || "no-user"}
+            isOpen={openDetailModal}
+            onClose={() => {
+              setOpenDetailModal(false)
+              setSelectedUser(null)
+            }}
+            user={selectedUser}
+            loading={loading}
           />
     </div >
   );

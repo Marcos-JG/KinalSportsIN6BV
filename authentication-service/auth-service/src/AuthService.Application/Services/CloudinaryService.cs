@@ -79,7 +79,7 @@ public class CloudinaryService(IConfiguration configuration) : ICloudinaryServic
 
     public string GetDefaultAvatarUrl()
     {
-        var baseUrl = configuration["CloudinarySettings:BaseUrl"] ?? "https://res.cloudinary.com/dug3apxt3/image/upload/";
+        var baseUrl = configuration["CloudinarySettings:BaseUrl"] ?? "https://res.cloudinary.com/djuxr89ny/image/upload/";
         var defaultPath = configuration["CloudinarySettings:DefaultAvatarPath"] ?? "auth_service/profiles/avatarDefault-1749508519496_oam3k3";
         // Asegurar que tenga extensión .png
         if (!defaultPath.EndsWith(".png"))
