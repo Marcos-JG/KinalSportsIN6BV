@@ -10,8 +10,9 @@ const PAGE_SIZE = 8;
 
 export const Users = () => {
 
-  const { users, loading, error, fetchUsers } = useUserManagmentStore();
+  const { users, loading, error, fetchUsers, updateUserRole } = useUserManagmentStore();
   const registerUser = useAuthStore((state) => state.register);
+  const currentUser = useAuthStore((state) => state.user);
 
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState("ALL");
@@ -31,12 +32,22 @@ export const Users = () => {
     console.log("User created:", res);
     if (res.success) {
       showSuccess("Usuario creado exitosamente, se envio un correo de verificación");
-      await fetchUsers(undefined, {force: true});
+      await fetchUsers(undefined, { force: true });
       return true;
 
     }
     showError(res.error || "Error al crear usuario");
-    return false; 
+    return false;
+  }
+  const handleSaveRole = async (userId, newRole) => {
+    const res = await updateUserRole(userId, newRole);
+    if (res.success) {
+      showSuccess("Rol actualizado exitosamente");
+      setOpenDetailModal(false);
+      setSelectedUser(null);
+    }else{
+      showError(res.error || "Error al actualizar rol del usuario");
+    }
   }
 
   const handleOpenDetail = (user) => {
@@ -56,8 +67,8 @@ export const Users = () => {
           </p>
         </div>
 
-        <button 
-          className="bg-main-blue px-4 py-2 rounded text-white hover:opacity-90 transition" 
+        <button
+          className="bg-main-blue px-4 py-2 rounded text-white hover:opacity-90 transition"
           onClick={() => setOpenCreateModal(true)}
         >
           + Agregar Usuario
@@ -117,13 +128,13 @@ export const Users = () => {
                     </td>
 
                     <td className="px-4 py-3 ">
-                      <span className= {`px-2 py-1 rounded-full text-xs font-semibold ${u.role === 'ADMIN_ROLE' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'}`}>
+                      <span className={`px-2 py-1 rounded-full text-xs font-semibold ${u.role === 'ADMIN_ROLE' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'}`}>
                         {u.role}
                       </span>
                     </td>
                     <td className="px-3 py-3 text-right">
-                      <button 
-                      className="px-3 py-1.5 rounded border font-semibold bg-main-blue text-white text-sm hover:opacity-90 transition "
+                      <button
+                        className="px-3 py-1.5 rounded border font-semibold bg-main-blue text-white text-sm hover:opacity-90 transition "
                         onClick={() => handleOpenDetail(u)}
                       >
                         Ver/Editar
@@ -157,24 +168,26 @@ export const Users = () => {
           </div>
         </div>
       </div>
-          <CreateUserModal
-          isOpen={openCreateModal}
-          onClose={() => setOpenCreateModal(false)}
-          onCreate={handleCreate}
-          loading={loading}
-          error={error}
-          />
+      <CreateUserModal
+        isOpen={openCreateModal}
+        onClose={() => setOpenCreateModal(false)}
+        onCreate={handleCreate}
+        loading={loading}
+        error={error}
+      />
 
-          <UserDetailModal
-           key={selectedUser?.id || "no-user"}
-            isOpen={openDetailModal}
-            onClose={() => {
-              setOpenDetailModal(false)
-              setSelectedUser(null)
-            }}
-            user={selectedUser}
-            loading={loading}
-          />
+      <UserDetailModal
+        key={selectedUser?.id || "no-user"}
+        isOpen={openDetailModal}
+        onClose={() => {
+          setOpenDetailModal(false)
+          setSelectedUser(null)
+        }}
+        user={selectedUser}
+        onSaveRole={handleSaveRole}
+         currentUserId={currentUser?.id}
+        loading={loading}
+      />
     </div >
   );
 }
