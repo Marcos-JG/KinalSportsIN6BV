@@ -6,7 +6,8 @@ export const Sidebar = () => {
  
     const items = [
         { label: "Canchas", to: "/dashboard/fields"},
-        { label: "Reservaciones", to: "/dashboard/reservations"}
+        { label: "Reservaciones", to: "/dashboard/reservations"},
+        { label: "Usuarios", to: "/dashboard/users" }
     ]
  
  

@@ -1,0 +1,83 @@
+[2026-04-22 13:12:41 INF] Checking database connection... {"SourceContext":"Program"}
+[2026-04-22 13:12:42 INF] Database ready. Running seed data... {"SourceContext":"Program"}
+[2026-04-22 13:12:42 INF] Database initialization completed successfully {"SourceContext":"Program"}
+[2026-04-22 13:12:42 INF] AuthService API is running at http://localhost:5156. Health endpoint: http://localhost:5156/health {"SourceContext":"Program"}
+[2026-04-22 13:12:55 INF] HTTP OPTIONS /api/v1/auth/login responded 204 in 2.2027 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H31:00000001","ConnectionId":"0HNL0KCK88H31"}
+[2026-04-22 13:12:55 INF] User login succeeded {"EventId":{"Id":1002,"Name":"LogUserLoggedIn"},"SourceContext":"AuthService.Application.Services.AuthService","ActionId":"32cd496b-4f32-484c-b487-6ad62780e916","ActionName":"AuthService.Api.Controllers.AuthController.Login (AuthService.Api)","RequestId":"0HNL0KCK88H31:00000002","RequestPath":"/api/v1/auth/login","ConnectionId":"0HNL0KCK88H31"}
+[2026-04-22 13:12:56 INF] HTTP POST /api/v1/auth/login responded 200 in 711.3846 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H31:00000002","ConnectionId":"0HNL0KCK88H31"}
+[2026-04-22 13:12:58 INF] HTTP OPTIONS /api/v1/auth/users responded 204 in 0.2791 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H31:00000003","ConnectionId":"0HNL0KCK88H31"}
+[2026-04-22 13:12:58 INF] HTTP GET /api/v1/auth/users responded 200 in 89.5403 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H31:00000004","ConnectionId":"0HNL0KCK88H31"}
+[2026-04-22 13:13:01 INF] HTTP OPTIONS /api/v1/users/usr_ERkinBMeM5Jn/role responded 204 in 0.1639 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H31:00000005","ConnectionId":"0HNL0KCK88H31"}
+[2026-04-22 13:13:01 INF] HTTP PUT /api/v1/users/usr_ERkinBMeM5Jn/role responded 200 in 63.1462 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H31:00000006","ConnectionId":"0HNL0KCK88H31"}
+[2026-04-22 13:13:04 INF] HTTP PUT /api/v1/users/usr_ERkinBMeM5Jn/role responded 200 in 39.4121 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H31:00000007","ConnectionId":"0HNL0KCK88H31"}
+[2026-04-22 13:13:06 INF] HTTP GET /api/v1/auth/users responded 200 in 7.2058 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H31:00000008","ConnectionId":"0HNL0KCK88H31"}
+[2026-04-22 13:21:55 INF] HTTP OPTIONS /api/v1/auth/register responded 204 in 0.0665 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H32:00000001","ConnectionId":"0HNL0KCK88H32"}
+[2026-04-22 13:21:57 INF] User Marcoos registered successfully {"EventId":{"Id":1001,"Name":"LogUserRegistered"},"SourceContext":"AuthService.Application.Services.AuthService","ActionId":"408ef1c1-7096-426c-8005-2f9227b54fe8","ActionName":"AuthService.Api.Controllers.AuthController.Register (AuthService.Api)","RequestId":"0HNL0KCK88H32:00000002","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNL0KCK88H32"}
+[2026-04-22 13:21:57 INF] HTTP POST /api/v1/auth/register responded 201 in 1740.7810 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H32:00000002","ConnectionId":"0HNL0KCK88H32"}
+[2026-04-22 13:21:57 INF] HTTP GET /api/v1/auth/users responded 200 in 4.4692 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H32:00000003","ConnectionId":"0HNL0KCK88H32"}
+[2026-04-22 13:22:18 ERR] Failed to send email {"SourceContext":"AuthService.Application.Services.EmailService","ActionId":"408ef1c1-7096-426c-8005-2f9227b54fe8","ActionName":"AuthService.Api.Controllers.AuthController.Register (AuthService.Api)","RequestId":"0HNL0KCK88H32:00000002","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNL0KCK88H32"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthService.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Users\Informatica\Desktop\2024412\KinalSportsIN6BV\authentication-service\auth-service\src\AuthService.Application\Services\EmailService.cs:line 119
+[2026-04-22 13:22:19 ERR] Failed to send email {"SourceContext":"AuthService.Application.Services.EmailService","ActionId":"408ef1c1-7096-426c-8005-2f9227b54fe8","ActionName":"AuthService.Api.Controllers.AuthController.Register (AuthService.Api)","RequestId":"0HNL0KCK88H32:00000002","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNL0KCK88H32"}
+System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthService.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Users\Informatica\Desktop\2024412\KinalSportsIN6BV\authentication-service\auth-service\src\AuthService.Application\Services\EmailService.cs:line 119
+[2026-04-22 13:22:19 ERR] Failed to send verification email {"SourceContext":"AuthService.Application.Services.AuthService","ActionId":"408ef1c1-7096-426c-8005-2f9227b54fe8","ActionName":"AuthService.Api.Controllers.AuthController.Register (AuthService.Api)","RequestId":"0HNL0KCK88H32:00000002","RequestPath":"/api/v1/auth/register","ConnectionId":"0HNL0KCK88H32"}
+System.InvalidOperationException: Failed to send email: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+ ---> System.Net.Sockets.SocketException (10060): Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at MailKit.Net.SocketUtils.SocketConnectState.OnEndConnect(IAsyncResult ar)
+--- End of stack trace from previous location ---
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, CancellationToken cancellationToken)
+   at MailKit.Net.SocketUtils.ConnectAsync(String host, Int32 port, IPEndPoint localEndPoint, Int32 timeout, CancellationToken cancellationToken)
+   at MailKit.MailService.ConnectNetworkAsync(String host, Int32 port, CancellationToken cancellationToken)
+   at MailKit.Net.Smtp.SmtpClient.ConnectAsync(String host, Int32 port, SecureSocketOptions options, CancellationToken cancellationToken)
+   at AuthService.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Users\Informatica\Desktop\2024412\KinalSportsIN6BV\authentication-service\auth-service\src\AuthService.Application\Services\EmailService.cs:line 119
+   --- End of inner exception stack trace ---
+   at AuthService.Application.Services.EmailService.SendEmailAsync(String to, String subject, String body) in C:\Users\Informatica\Desktop\2024412\KinalSportsIN6BV\authentication-service\auth-service\src\AuthService.Application\Services\EmailService.cs:line 171
+   at AuthService.Application.Services.EmailService.SendEmailVerificationAsync(String email, String username, String token) in C:\Users\Informatica\Desktop\2024412\KinalSportsIN6BV\authentication-service\auth-service\src\AuthService.Application\Services\EmailService.cs:line 29
+   at AuthService.Application.Services.AuthService.<>c__DisplayClass9_0.<<RegisterAsync>b__0>d.MoveNext() in C:\Users\Informatica\Desktop\2024412\KinalSportsIN6BV\authentication-service\auth-service\src\AuthService.Application\Services\AuthService.cs:line 140
+[2026-04-22 14:08:50 INF] HTTP OPTIONS /api/v1/auth/users responded 204 in 0.2108 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H33:00000001","ConnectionId":"0HNL0KCK88H33"}
+[2026-04-22 14:08:50 INF] HTTP GET /api/v1/auth/users responded 401 in 3.2624 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H33:00000002","ConnectionId":"0HNL0KCK88H33"}
+[2026-04-22 14:08:55 INF] HTTP OPTIONS /api/v1/auth/login responded 204 in 0.0879 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H33:00000003","ConnectionId":"0HNL0KCK88H33"}
+[2026-04-22 14:08:55 INF] User login succeeded {"EventId":{"Id":1002,"Name":"LogUserLoggedIn"},"SourceContext":"AuthService.Application.Services.AuthService","ActionId":"32cd496b-4f32-484c-b487-6ad62780e916","ActionName":"AuthService.Api.Controllers.AuthController.Login (AuthService.Api)","RequestId":"0HNL0KCK88H33:00000004","RequestPath":"/api/v1/auth/login","ConnectionId":"0HNL0KCK88H33"}
+[2026-04-22 14:08:55 INF] HTTP POST /api/v1/auth/login responded 200 in 60.3712 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H33:00000004","ConnectionId":"0HNL0KCK88H33"}
+[2026-04-22 14:08:58 INF] HTTP GET /api/v1/auth/users responded 200 in 3.8493 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H33:00000005","ConnectionId":"0HNL0KCK88H33"}
+[2026-04-22 15:57:24 INF] HTTP GET /api/v1/fields responded 404 in 0.3032 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H34:00000001","ConnectionId":"0HNL0KCK88H34"}
+[2026-04-22 16:35:19 INF] HTTP OPTIONS /api/v1/auth/login responded 204 in 0.3038 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H35:00000001","ConnectionId":"0HNL0KCK88H35"}
+[2026-04-22 16:35:19 INF] User login succeeded {"EventId":{"Id":1002,"Name":"LogUserLoggedIn"},"SourceContext":"AuthService.Application.Services.AuthService","ActionId":"32cd496b-4f32-484c-b487-6ad62780e916","ActionName":"AuthService.Api.Controllers.AuthController.Login (AuthService.Api)","RequestId":"0HNL0KCK88H35:00000002","RequestPath":"/api/v1/auth/login","ConnectionId":"0HNL0KCK88H35"}
+[2026-04-22 16:35:19 INF] HTTP POST /api/v1/auth/login responded 200 in 89.6921 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H35:00000002","ConnectionId":"0HNL0KCK88H35"}
+[2026-04-22 16:35:21 INF] HTTP OPTIONS /api/v1/auth/users responded 204 in 0.1349 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H35:00000003","ConnectionId":"0HNL0KCK88H35"}
+[2026-04-22 16:35:21 INF] HTTP GET /api/v1/auth/users responded 200 in 3.8771 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H35:00000004","ConnectionId":"0HNL0KCK88H35"}
+[2026-04-22 16:36:00 INF] User login succeeded {"EventId":{"Id":1002,"Name":"LogUserLoggedIn"},"SourceContext":"AuthService.Application.Services.AuthService","ActionId":"32cd496b-4f32-484c-b487-6ad62780e916","ActionName":"AuthService.Api.Controllers.AuthController.Login (AuthService.Api)","RequestId":"0HNL0KCK88H35:00000005","RequestPath":"/api/v1/auth/login","ConnectionId":"0HNL0KCK88H35"}
+[2026-04-22 16:36:00 INF] HTTP POST /api/v1/auth/login responded 200 in 50.9717 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H35:00000005","ConnectionId":"0HNL0KCK88H35"}
+[2026-04-22 17:03:48 INF] HTTP OPTIONS /api/v1/auth/login responded 204 in 0.1358 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H36:00000001","ConnectionId":"0HNL0KCK88H36"}
+[2026-04-22 17:03:48 INF] User login succeeded {"EventId":{"Id":1002,"Name":"LogUserLoggedIn"},"SourceContext":"AuthService.Application.Services.AuthService","ActionId":"32cd496b-4f32-484c-b487-6ad62780e916","ActionName":"AuthService.Api.Controllers.AuthController.Login (AuthService.Api)","RequestId":"0HNL0KCK88H36:00000002","RequestPath":"/api/v1/auth/login","ConnectionId":"0HNL0KCK88H36"}
+[2026-04-22 17:03:48 INF] HTTP POST /api/v1/auth/login responded 200 in 61.2896 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H36:00000002","ConnectionId":"0HNL0KCK88H36"}
+[2026-04-22 17:08:09 INF] HTTP OPTIONS /api/v1/auth/users responded 204 in 0.0612 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H37:00000001","ConnectionId":"0HNL0KCK88H37"}
+[2026-04-22 17:08:09 INF] HTTP GET /api/v1/auth/users responded 200 in 3.5790 ms {"SourceContext":"Serilog.AspNetCore.RequestLoggingMiddleware","RequestId":"0HNL0KCK88H37:00000002","ConnectionId":"0HNL0KCK88H37"}

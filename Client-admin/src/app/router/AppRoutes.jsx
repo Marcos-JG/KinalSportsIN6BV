@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import { AuthPage } from "../../features/auth/pages/AuthPage.jsx"
 import { DashboardPage } from "../layouts/DashboardPage.jsx"
 import { Users } from "../../features/users/components/Users.jsx"
+import { Fields } from "../../features/fields/components/Fields.jsx"
 
 export const AppRoutes = () => {
     return (
@@ -9,6 +10,7 @@ export const AppRoutes = () => {
             <Route path="/" element={<AuthPage/>} />
             <Route path="/dashboard" element={<DashboardPage/>} >
                 <Route path="users" element={<Users/>} />
+                <Route path="fields" element={<Fields/>} />
             </Route>
         </Routes>
     )
