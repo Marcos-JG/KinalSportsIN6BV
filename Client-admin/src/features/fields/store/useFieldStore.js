@@ -2,6 +2,8 @@ import { create } from "zustand";
 import {
     getFields as getFieldsRequest,
     createField as createFieldRequest,
+    updateField as updateFieldRequest,
+    deleteField as deleteFieldRequest
 } from "../../../shared/api";
 
 export const useFieldStore = create((set, get) => ({
@@ -43,5 +45,42 @@ export const useFieldStore = create((set, get) => ({
                 error: error.response?.data?.message || "Error al crear campo."
             })
         }
+    },
+
+    updateField: async (id, data) => {
+        try {
+            set({ loading: true, error: null });
+            const response = await updateFieldRequest(id, data);
+
+            const update = response.data.data
+            set({
+                fields:get ().fields.map((f) =>
+                     f._id === id ? update : f
+            ),
+            loading: false
+            })
+        } catch (error) {
+            set({
+                loading: false,
+                error: error.response?.data?.message || "Error al actualizar campo."
+            })
+        }
+    },
+
+    deleteField: async (id) => {
+        try {
+            set({ loading: true, error: null });
+            await deleteFieldRequest(id);
+            set({
+                fields: get().fields.filter((f) => f._id !== id),
+                loading: false
+            });
+        } catch (error) {
+            set({
+                loading: false,
+                error: error.response?.data?.message || "Error al eliminar campo."
+            });
+        }
     }
+
 }))

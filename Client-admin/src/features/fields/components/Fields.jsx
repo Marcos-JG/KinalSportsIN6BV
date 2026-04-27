@@ -4,13 +4,15 @@ import { Spinner } from "../../../shared/components/layout/Spinner.jsx"
 import { useEffect as useToastEffect } from "react";
 import { showError } from "../../../shared/utils/toast.js"
 import { FieldModal } from "./FieldModal.jsx";
+import { useUIStore } from "../../../shared/components/ui/uiStore.js";
 
 
 export const Fields = () => {
 
-    const { fields, loading, error, getFields } = useFieldStore();
+    const { fields, loading, error, getFields, deleteField } = useFieldStore();
     const [openModal, setOpenModal] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
+    const { openConfirm } = useUIStore();
 
     useEffect(() => {
         getFields();
@@ -90,7 +92,18 @@ export const Fields = () => {
                                     ✏️ Editar
                                 </button>
 
-                                <button className="flex-1 py-2 rounded-lg bg-red-600 text-white font-medium hover:bg-red-700 transition">
+                                <button 
+                                className="flex-1 py-2 rounded-lg bg-red-600 text-white font-medium hover:bg-red-700 transition"
+                                 onClick={() => 
+                                    openConfirm({
+                                        title: "Eliminar Campo",
+                                        message: `¿Estás seguro de que deseas eliminar el campo "${field.fieldName}"?`,
+                                        onConfirm: () => {
+                                            deleteField(field._id);
+                                        }
+                                    })
+                                 }
+                                >
                                     🗑️ Eliminar
                                 </button>
                             </div>

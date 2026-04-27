@@ -51,7 +51,7 @@ router.put(
 );
 
 router.put(
-  '/:id/deactivate',
+  '/:id/desactivate',
   validateFieldStatusChange,
   requireRole('ADMIN_ROLE'),
   changeFieldStatus
