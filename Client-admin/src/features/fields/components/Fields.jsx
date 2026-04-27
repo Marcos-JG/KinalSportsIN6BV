@@ -1,31 +1,26 @@
 import { useState, useEffect } from "react";
 import { useFieldStore } from "../store/useFieldStore";
-import { Spinner } from "../../../shared/components/layout/Spinner";
-import { useEffect as useToastEffect } from "react"
-import { showError } from "../../../shared/utils/toast";
-import { FieldModal } from "./FieldModal";
-
+import { Spinner } from "../../../shared/components/layout/Spinner.jsx"
+import { useEffect as useToastEffect } from "react";
+import { showError } from "../../../shared/utils/toast.js"
+import { FieldModal } from "./FieldModal.jsx";
 
 
 export const Fields = () => {
 
     const { fields, loading, error, getFields } = useFieldStore();
     const [openModal, setOpenModal] = useState(false);
+    const [selectedFile, setSelectedFile] = useState(null);
 
     useEffect(() => {
         getFields();
     }, [getFields]);
 
     useToastEffect(() => {
-        if (error)
-            showError(error);
+        if (error) showError(error);
+    }, [error])
 
-    }, [error]);
-
-    if (loading) {
-        return <Spinner />;
-    }
-
+    if (loading) return <Spinner />
     return (
         <div className="p-4">
             {/* HEADER */}
@@ -40,8 +35,11 @@ export const Fields = () => {
                 </div>
 
                 <button
+                    onClick={() => {
+                        setOpenModal(true)
+                        setSelectedFile(null)
+                    }}
                     className="bg-main-blue px-4 py-2 rounded text-white hover:opacity-90 transition"
-                    onClick={() => setOpenModal(true)}
                 >
                     + Agregar Campo
                 </button>
@@ -49,10 +47,9 @@ export const Fields = () => {
 
             {/* GRID RESPONSIVE */}
             <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
                 {fields.map((field) => (
-
                     <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:scale-[1.02]">
-
 
                         <div className="w-full h-52 bg-gray-100 flex items-center justify-center">
                             <img
@@ -62,12 +59,10 @@ export const Fields = () => {
                             />
                         </div>
 
-
                         <div className="p-5">
                             <h2 className="text-xl font-bold text-main-blue">
-                               {field.fieldName}
+                                {field.fieldName}
                             </h2>
-
 
                             <div className="flex gap-2 mt-2 flex-wrap">
                                 <span className="px-3 py-1 text-xs rounded-full bg-blue-100 text-blue-700 font-medium">
@@ -79,14 +74,19 @@ export const Fields = () => {
                                 </span>
                             </div>
 
-
                             <p className="text-sm text-gray-400 mt-2 truncate">
                                 ID: {field._id}
                             </p>
 
-
                             <div className="flex gap-3 mt-5">
-                                <button className="flex-1 py-2 rounded-lg bg-main-blue text-white font-medium hover:opacity-90 transition">
+                                <button
+                                 className="flex-1 py-2 rounded-lg bg-main-blue text-white font-medium hover:opacity-90 transition"
+                                 onClick={() => {
+                                    setSelectedFile(field);
+                                    setOpenModal(true);
+
+                                 } }
+                                 >
                                     ✏️ Editar
                                 </button>
 
@@ -98,9 +98,14 @@ export const Fields = () => {
                     </div>
                 ))}
             </div>
+
             <FieldModal
                 isOpen={openModal}
-                onClose={() => setOpenModal(false)}
+                onClose={() => {
+                    setOpenModal(false)
+                    setSelectedFile(null)
+                }}
+                field={selectedFile}
             />
         </div>
     );
