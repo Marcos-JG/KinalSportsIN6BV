@@ -44,7 +44,8 @@ export const useAuthStore = create(
                     user: null,
                     token: null,
                     expiresAt: null,
-                    isAuthenticated: false
+                    isAuthenticated: false,
+                    isLoadingAuth: false
                 });
             },
 
@@ -81,7 +82,8 @@ export const useAuthStore = create(
                             isAuthenticated: false,
                             isLoadingAuth: true,
                             loading: false,
-                            error: message
+                            error: message,
+                            isLoadingAuth: false
                         })
 
                         showError(message);
