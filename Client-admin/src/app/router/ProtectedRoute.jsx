@@ -15,6 +15,7 @@ export const ProtectedRoute= ({ children }) => {
     const isAuthenticated = useAuthStore ((state) => state.isAuthenticated);
     const isLoadingAuth = useAuthStore((state) => state.isLoadingAuth);
 
+    
     if(isLoadingAuth) return <Spinner />
 
     if(!isAuthenticated) return <Navigate to="/" replace />
